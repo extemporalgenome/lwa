@@ -3,4 +3,5 @@ traditional desktop GUI applications.
 
 Documentation: https://godoc.org/github.com/extemporalgenome/lwa
 
-lwa is under review, and may change.
+lwa is under review, and may change. When lwa stabilizes, it will be available
+under github.com/xtgo
