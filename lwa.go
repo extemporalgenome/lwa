@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Package lwa facilitates running local web applications.
+//
+// Chrome is currently the only browser supported; on each app invocation,
+// a temporary browser profile will be created, and Chrome will be launched
+// in incognito, "app" mode.
 package lwa
 
 import (
@@ -31,6 +36,17 @@ type browser interface {
 	Run(dir, url string) error
 }
 
+// Serve starts a browser instance and http server connected pair via a random
+// port. If handler is nil, http.DefaultServerMux will be used. Serve is
+// analogous to http.ListenAndServe, except that it will return with a nil
+// error after the app browser window is closed.
+//
+// Serve implicitly authenticates the running OS user using random pre-shared
+// tokens; these are loaded into the browser through a file readable only to
+// the running OS user. Since content is served through localhost, non-root
+// users are unable to observe traffic; further, keep-alives are disabled.
+// After the browser is closed, Serve will block until all open, non-hijacked
+// connections are closed before returning.
 func Serve(handler http.Handler) error {
 	browser, err := getBrowser()
 	if err != nil {

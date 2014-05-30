@@ -1,0 +1,6 @@
+lwa facilitates running Go web applications locally; it can fill the role of
+traditional desktop GUI applications.
+
+Documentation: https://godoc.org/github.com/extemporalgenome/lwa
+
+lwa is under review, and may change.
